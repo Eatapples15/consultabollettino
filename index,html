@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allerta Meteo Basilicata</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .alert-form, .alert-display {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .alert-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .verde { background-color: green; }
+        .giallo { background-color: yellow; color: black; }
+        .arancione { background-color: orange; }
+        .rosso { background-color: red; }
+        .hidden {
+            display: none;
+        }
+        #alertResults {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        #alertResults h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="alert-form">
+        <h1>Inserimento Allerte Meteo</h1>
+        <p>Seleziona i colori di allerta per oggi e domani per ciascuna base.</p>
+
+        <form id="alertForm">
+            <fieldset>
+                <legend>Allerte per Oggi - <?php echo date('d/m/Y'); ?></legend>
+                <label for="A1_oggi">Base A1:</label>
+                <select id="A1_oggi" name="A1_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="A2_oggi">Base A2:</label>
+                <select id="A2_oggi" name="A2_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="B_oggi">Base B:</label>
+                <select id="B_oggi" name="B_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="C_oggi">Base C:</label>
+                <select id="C_oggi" name="C_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="D_oggi">Base D:</label>
+                <select id="D_oggi" name="D_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="E1_oggi">Base E1:</label>
+                <select id="E1_oggi" name="E1_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="E2_oggi">Base E2:</label>
+                <select id="E2_oggi" name="E2_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Allerte per Domani - <?php echo date('d/m/Y', strtotime('+1 day')); ?></legend>
+                <label for="A1_domani">Base A1:</label>
+                <select id="A1_domani" name="A1_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="A2_domani">Base A2:</label>
+                <select id="A2_domani" name="A2_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="B_domani">Base B:</label>
+                <select id="B_domani" name="B_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="C_domani">Base C:</label>
+                <select id="C_domani" name="C_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="D_domani">Base D:</label>
+                <select id="D_domani" name="D_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="E1_domani">Base E1:</label>
+                <select id="E1_domani" name="E1_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="E2_domani">Base E2:</label>
+                <select id="E2_domani" name="E2_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+            </fieldset>
+
+            <button type="button" onclick="salvaAllerte()">Salva e Visualizza Allerte</button>
+        </form>
+    </div>
+
+    <div class="alert-display hidden">
+        <h1>Allerta Meteo Basilicata</h1>
+
+        <label for="comune">Seleziona il tuo Comune:</label>
+        <select id="comune">
+            <option value="">-- Seleziona un Comune --</option>
+            <optgroup label="Base A1">
+                <option value="Montemilone">Montemilone</option>
+                <option value="Atella">Atella</option>
+                <option value="PalazzoSanGervasio">Palazzo San Gervasio</option>
+                <option value="Pescopagano">Pescopagano</option>
+                <option value="Rapolla">Rapolla</option>
+                <option value="Rapone">Rapone</option>
+                <option value="RioneroinVulture">Rionero in Vulture</option>
+                <option value="Ripacandida">Ripacandida</option>
+                <option value="RuvodelMonte">Ruvo del Monte</option>
+                <option value="SanFele">San Fele</option>
+                <option value="Filiano_A1">Filiano</option>
+                <option value="Forenza_A1">Forenza</option>
+                <option value="Lavello">Lavello</option>
+                <option value="Barile">Barile</option>
+                <option value="Maschito">Maschito</option>
+                <option value="Melfi">Melfi</option>
+                <option value="Venosa">Venosa</option>
+                <option value="Ginestra">Ginestra</option>
+            </optgroup>
+            <optgroup label="Base A2">
+                <option value="MuroLucano">Muro Lucano</option>
+                <option value="Balvano">Balvano</option>
+                <option value="Baragiano">Baragiano</option>
+                <option value="Bella">Bella</option>
+                <option value="Brienza">Brienza</option>
+                <option value="Castelgrande">Castelgrande</option>
+                <option value="Picerno">Picerno</option>
+                <option value="Ruoti">Ruoti</option>
+                <option value="SantAngeloLeFratte">Sant'Angelo Le Fratte</option>
+                <option value="SassodiCastalda">Sasso di Castalda</option>
+                <option value="SatrianodiLucania">Satriano di Lucania</option>
+                <option value="SavoiadiLucania">Savoia di Lucania</option>
+                <option value="Tito_A2">Tito</option>
+                <option value="VietridiPotenza">Vietri di Potenza</option>
+            </optgroup>
+            <optgroup label="Base B">
+                <option value="Abriola">Abriola</option>
+                <option value="Accettura">Accettura</option>
+                <option value="Acerenza">Acerenza</option>
+                <option value="AlbanodiLucania">Albano di Lucania</option>
+                <option value="Anzi">Anzi</option>
+                <option value="Avigliano">Avigliano</option>
+                <option value="Banzi">Banzi</option>
+                <option value="BrindisiMontagna">Brindisi Montagna</option>
+                <option value="Calciano">Calciano</option>
+                <option value="Calvello">Calvello</option>
+                <option value="Campomaggiore">Campomaggiore</option>
+                <option value="Cancellara">Cancellara</option>
+                <option value="Castelmezzano">Castelmezzano</option>
+                <option value="Ferrandina_B">Ferrandina</option>
+                <option value="Filiano_B">Filiano</option>
+                <option value="Forenza_B">Forenza</option>
+                <option value="Garaguso">Garaguso</option>
+                <option value="GenzanodiLucania">Genzano di Lucania</option>
+                <option value="Grassano">Grassano</option>
+                <option value="Grottole">Grottole</option>
+                <option value="Irsina">Irsina</option>
+                <option value="Laurenzana">Laurenzana</option>
+                <option value="Miglionico">Miglionico</option>
+                <option value="OlivetoLucano">Oliveto Lucano</option>
+                <option value="OppidoLucano">Oppido Lucano</option>
+                <option value="Pietragalla">Pietragalla</option>
+                <option value="Pietrapertosa">Pietrapertosa</option>
+                <option value="Pignola">Pignola</option>
+                <option value="Pomarico_B">Pomarico</option>
+                <option value="Potenza">Potenza</option>
+                <option value="Salandra">Salandra</option>
+                <option value="SanChiricoNuovo">San Chirico Nuovo</option>
+                <option value="SanMauroForte">San Mauro Forte</option>
+                <option value="Tito_B">Tito</option>
+                <option value="Tolve">Tolve</option>
+                <option value="Tricarico">Tricarico</option>
+                <option value="Trivigno">Trivigno</option>
+                <option value="VaglioBasilicata">Vaglio Basilicata</option>
+                <option value="Matera">Matera</option>
+            </optgroup>
+            <optgroup label="Base C">
+                <option value="Montemurro">Montemurro</option>
+                <option value="Aliano">Aliano</option>
+                <option value="Armento">Armento</option>
+                <option value="Calvera">Calvera</option>
+                <option value="Carbone">Carbone</option>
+                <option value="CastronuovodiSantAndrea">Castronuovo di Sant'Andrea</option>
+                <option value="Cersosimo">Cersosimo</option>
+                <option value="Chiaromonte">Chiaromonte</option>
+                <option value="Cirigliano">Cirigliano</option>
+                <option value="Colobraro">Colobraro</option>
+                <option value="CorletoPerticara">Corleto Perticara</option>
+                <option value="Episcopia">Episcopia</option>
+                <option value="Fardella">Fardella</option>
+                <option value="FrancavillainSinni">Francavilla in Sinni</option>
+                <option value="Gallicchio">Gallicchio</option>
+                <option value="Gorgoglione">Gorgoglione</option>
+                <option value="GrumentoNova">Grumento Nova</option>
+                <option value="GuardiaPerticara">Guardia Perticara</option>
+                <option value="MarsicoNuovo">Marsico Nuovo</option>
+                <option value="Marsicovetere">Marsicovetere</option>
+                <option value="Missanello">Missanello</option>
+                <option value="Moliterno">Moliterno</option>
+                <option value="Noepoli">Noepoli</option>
+                <option value="Paterno">Paterno</option>
+                <option value="Roccanova">Roccanova</option>
+                <option value="SanChiricoRaparo">San Chirico Raparo</option>
+                <option value="SanCostantinoAlbanese">San Costantino Albanese</option>
+                <option value="SanGiorgioLucano">San Giorgio Lucano</option>
+                <option value="SanMartinodAgri">San Martino d'Agri</option>
+                <option value="SanPaoloAlbanese">San Paolo Albanese</option>
+                <option value="SanSeverinoLucano">San Severino Lucano</option>
+                <option value="SantArcangelo">Sant'Arcangelo</option>
+                <option value="Sarconi">Sarconi</option>
+                <option value="Senise">Senise</option>
+                <option value="Spinoso">Spinoso</option>
+                <option value="Stigliano">Stigliano</option>
+                <option value="Teana">Teana</option>
+                <option value="TerranovadiPollino">Terranova di Pollino</option>
+                <option value="Tramutola">Tramutola</option>
+                <option value="Tursi_C">Tursi</option>
+                <option value="Valsinni">Valsinni</option>
+                <option value="Viggiano">Viggiano</option>
+            </optgroup>
+            <optgroup label="Base D">
+                <option value="Nemoli">Nemoli</option>
+                <option value="CastelluccioInferiore">Castelluccio Inferiore</option>
+                <option value="CastelluccioSuperiore">Castelluccio Superiore</option>
+                <option value="Castelsaraceno">Castelsaraceno</option>
+                <option value="Lagonegro">Lagonegro</option>
+                <option value="Latronico">Latronico</option>
+                <option value="Lauria">Lauria</option>
+                <option value="Maratea">Maratea</option>
+                <option value="Rivello">Rivello</option>
+                <option value="Rotonda">Rotonda</option>
+                <option value="Trecchina">Trecchina</option>
+                <option value="Viggianello_D">Viggianello</option>
+            </optgroup>
+            <optgroup label="Base E1">
+                <option value="NovaSiri">Nova Siri</option>
+                <option value="Policoro">Policoro</option>
+                <option value="Rotondella_E1">Rotondella</option>
+                <option value="ScanzanoJonico">Scanzano Jonico</option>
+                <option value="Tursi_E1">Tursi</option>
+                <option value="MontalbanoJonico">Montalbano Jonico</option>
+                <option value="Craco">Craco</option>
+            </optgroup>
+            <optgroup label="Base E2">
+                <option value="Montescaglioso">Montescaglioso</option>
+                <option value="Bernalda">Bernalda</option>
+                <option value="Pisticci">Pisticci</option>
+                <option value="Pomarico_E2">Pomarico</option>
+                <option value="Ferrandina_E2">Ferrandina</option>
+            </optgroup>
+            <option value="all">Tutta la Regione</option>
+            <option value="A1_base">Base A1</option>
+            <option value="A2_base">Base A2</option>
+            <option value="B_base">Base B</option>
+            <option value="C_base">Base C</option>
+            <option value="D_base">Base D</option>
+            <option value="E1_base">Base E1</option>
+            <option value="E2_base">Base E2</option>
+        </select>
+
+        <div id="alertResults">
+            <h2>Allerta Meteo per <span id="selectedLocation"></span></h2>
+            <h3>Oggi - <?php echo date('d/m/Y'); ?></h3>
+            <p id="oggiAlert"></p>
+            <h3>Domani - <?php echo date('d/m/Y', strtotime('+1 day')); ?></h3>
+            <p id="domaniAlert"></p>
+        </div>
+    </div>
+
+    <script>
+        let allerteOggi = {};
+        let allerteDomani = {};
+        const comuniBaseA1 = ["Montemilone", "Atella", "PalazzoSanGervasio", "Pescopagano", "Rapolla", "Rapone", "RioneroinVulture", "Ripacandida", "RuvodelMonte", "SanFele", "Filiano_A1", "Forenza_A1", "Lavello", "Barile", "Maschito", "Melfi", "Venosa", "Ginestra"];
+        const comuniBaseA2 = ["MuroLucano", "Balvano", "Baragiano", "Bella", "Brienza", "Castelgrande", "Picerno", "Ruoti", "SantAngeloLeFratte", "SassodiCastalda", "SatrianodiLucania", "SavoiadiLucania", "Tito_A2", "VietridiPotenza"];
+        const comuniBaseB = ["Abriola", "Accettura", "Acerenza", "AlbanodiLucania", "Anzi", "Avigliano", "Banzi", "BrindisiMontagna", "Calciano", "Calvello", "Campomaggiore", "Cancellara", "Castelmezzano", "Ferrandina_B", "Filiano_B", "Forenza_B", "Garaguso", "GenzanodiLucania", "Grassano", "Grottole", "Irsina", "Laurenzana", "Miglionico", "OlivetoLucano", "OppidoLucano", "Pietragalla", "Pietrapertosa", "Pignola", "Pomarico_B", "Potenza", "Salandra", "SanChiricoNuovo", "SanMauroForte", "Tito_B", "Tolve", "Tricarico", "Trivigno", "VaglioBasilicata", "Matera"];
+        const comuniBaseC = ["Montemurro", "Aliano", "Armento", "Calvera", "Carbone", "CastronuovodiSantAndrea", "Cersosimo", "Chiaromonte", "Cirigliano", "Colobraro", "CorletoPerticara", "Episcopia", "Fardella", "FrancavillainSinni", "Gallicchio", "Gorgoglione", "GrumentoNova", "GuardiaPerticara", "MarsicoNuovo", "Marsicovetere", "Missanello", "Moliterno", "Noepoli", "Paterno", "Roccanova", "SanChiricoRaparo", "SanCostantinoAlbanese", "SanGiorgioLucano", "SanMartinodAgri", "SanPaoloAlbanese", "SanSeverinoLucano", "SantArcangelo", "Sarconi", "Senise", "Spinoso", "Stigliano", "Teana", "TerranovadiPollino", "Tramutola", "Tursi_C", "Valsinni", "Viggiano"];
+        const comuniBaseD = ["Nemoli", "CastelluccioInferiore", "CastelluccioSuperiore", "Castelsaraceno", "Lagonegro", "Latronico", "Lauria", "Maratea", "Rivello", "Rotonda", "Trecchina", "Viggianello_D"];
+        const comuniBaseE1 = ["NovaSiri", "Policoro", "Rotondella_E1", "ScanzanoJonico", "Tursi_E1", "MontalbanoJonico", "Craco"];
+        const comuniBaseE2 = ["Montescaglioso", "Bernalda", "Pisticci", "Pomarico_E2", "Ferrandina_E2"];
+
+        function salvaAllerte() {
+            allerteOggi = {
+                A1: document.getElementById("A1_oggi").value,
+                A2: document.getElementById("A2_oggi").value,
+                B: document.getElementById("B_oggi").value,
+                C: document.getElementById("C_oggi").value,
+                D: document.getElementById("D_oggi").value,
+                E1: document.getElementById("E1_oggi").value,
+                E2: document.getElementById("E2_oggi").value
+            };
+
+            allerteDomani = {
+                A1: document.getElementById("A1_domani").value,
+                A2: document.getElementById("A2_domani").value,
+                B: document.getElementById("B_domani").value,
+                C: document.getElementById("C_domani").value,
+                D: document.getElementById("D_domani").value,
+                E1: document.getElementById("E1_domani").value,
+                E2: document.getElementById("E2_domani").value
+            };
+
+            document.querySelector(".alert-form").classList.add("hidden");
+            document.querySelector(".alert-display").classList.remove("hidden");
+        }
+
+        function mostraAllerta() {
+            const comuneSelezionato = document.getElementById("comune").value;
+            const selectedLocationElement = document.getElementById("selectedLocation");
+            const oggiAlertElement = document.getElementById("oggiAlert");
+            const domaniAlertElement = document.getElementById("domaniAlert");
+
+            let oggiColor = "";
+            let domaniColor = "";
+            let baseComune = "";
+
+            if (comuniBaseA1.includes(comuneSelezionato)) baseComune = "A1";
+            else if (comuniBaseA2.includes(comuneSelezionato)) baseComune = "A2";
+            else if (comuniBaseB.includes(comuneSelezionato)) baseComune = "B";
+            else if (comuniBaseC.includes(comuneSelezionato)) baseComune = "C";
+            else if (comuniBaseD.includes(comuneSelezionato)) baseComune = "D";
+            else if (comuniBaseE1.includes(comuneSelezionato)) baseComune = "E1";
+            else if (comuniBaseE2.includes(comuneSelezionato)) baseComune = "E2";
+
+            if (comuneSelezionato === "all") {
+                selectedLocationElement.textContent = "Tutta la Regione";
+                oggiAlertElement.innerHTML = `
+                    Base A1: <span class="alert-color ${allerteOggi.A1}"></span> ${getColorText(allerteOggi.A1)}<br>
+                    Base A2: <span class="alert-color ${allerteOggi.A2}"></span> ${getColorText(allerteOggi.A2)}<br>
+                    Base B: <span class="alert-color ${allerteOggi.B}"></span> ${getColorText(allerteOggi.B)}<br>
+                    Base C: <span class="alert-color ${allerteOggi.C}"></span> ${getColorText(allerteOggi.C)}<br>
+                    Base D: <span class="alert-color ${allerteOggi.D}"></span> ${getColorText(allerteOggi.D)}<br>
+                    Base E1: <span class="alert-color ${allerteOggi.E1}"></span> ${getColorText(allerteOggi.E1)}<br>
+                    Base E2: <span class="alert-color ${allerteOggi.E2}"></span> ${getColorText(allerteOggi.E2)}
+                `;
+                domaniAlertElement.innerHTML = `
+                    Base A1: <span class="alert-color ${allerteDomani.A1}"></span> ${getColorText(allerteDomani.A1)}<br>
+                    Base A2: <span class="alert-color ${allerteDomani.A2}"></span> ${getColorText(allerteDomani.A2)}<br>
+                    Base B: <span class="alert-color ${allerteDomani.B}"></span> ${getColorText(allerteDomani.B)}<br>
+                    Base C: <span class="alert-color ${allerteDomani.C}"></span> ${getColorText(allerteDomani.C)}<br>
+                    Base D: <span class="alert-color ${allerteDomani.D}"></span> ${getColorText(allerteDomani.D)}<br>
+                    Base E1: <span class="alert-color ${allerteDomani.E1}"></span> ${getColorText(allerteDomani.E1)}<br>
+                    Base E2: <span class="alert-color ${allerteDomani.E2}"></span> ${getColorText(allerteDomani.E2)}
+                `;
+                return;
+            } else if (comuneSelezionato.endsWith("_base")) {
+                const base = comuneSelezionato.split("_")[0];
+                selectedLocationElement.textContent = `Base ${base}`;
+                oggiAlertElement.innerHTML = `<span class="alert-color ${allerteOggi[base]}"></span> ${getColorText(allerteOggi[base])}`;
+                domaniAlertElement.innerHTML = `<span class="alert-color ${allerteDomani[base]}"></span> ${getColorText(allerteDomani[base])}`;
+                return;
+            } else if (baseComune) {
+                selectedLocationElement.textContent = comuneSelezionato;
+                oggiAlertElement.innerHTML = `<span class="alert-color ${allerteOggi[baseComune]}"></span> ${getColorText(allerteOggi[baseComune])}`;
+                domaniAlertElement.innerHTML = `<span class="alert-color ${allerteDomani[baseComune]}"></span> ${getColorText(allerteDomani[baseComune])}`;
+                return;
+            } else {
+                selectedLocationElement.textContent = "Comune non trovato";
+                oggiAlertElement.textContent = "";
+                domaniAlertElement.textContent = "";
+            }
+        }
+
+        function getColorText(color) {
+            switch (color) {
+                case "verde":
+                    return "Nessuna allerta specifica.";
+                case "giallo":
+                    return "Possibili criticità idrogeologiche localizzate.";
+                case "arancione":
+                    return "Possibili fenomeni intensi con criticità idrogeologica diffusa.";
+                case "rosso":
+                    return "Elevata criticità per rischio idrogeologico e idraulico.";
+                default:
+                    return "Nessuna informazione sull'allerta.";
+            }
+        }
+
+        document.getElementById("comune").addEventListener("change", mostraAllerta);
+    </script>
+
+</body>
+</html>
