@@ -48,6 +48,9 @@
             margin-top: 0;
         }
     </style>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -82,6 +85,8 @@
                 <option value="Balvano">Balvano</option>
                 <option value="Baragiano">Baragiano</option>
                 <option value="Bella">Bella</option>
+                <option value="Brienza">Brienza</option>
+                <option value="Castelgrande">Castelgrande</
                 <option value="Brienza">Brienza</option>
                 <option value="Castelgrande">Castelgrande</option>
                 <option value="Picerno">Picerno</option>
@@ -126,4 +131,216 @@
                 <option value="Potenza">Potenza</option>
                 <option value="Salandra">Salandra</option>
                 <option value="SanChiricoNuovo">San Chirico Nuovo</option>
-                <option
+                <option value="SanMauroForte">San Mauro Forte</option>
+                <option value="Tito_B">Tito</option>
+                <option value="Tolve">Tolve</option>
+                <option value="Tricarico">Tricarico</option>
+                <option value="Trivigno">Trivigno</option>
+                <option value="VaglioBasilicata">Vaglio Basilicata</option>
+                <option value="Matera">Matera</option>
+            </optgroup>
+            <optgroup label="Base C">
+                <option value="Montemurro">Montemurro</option>
+                <option value="Aliano">Aliano</option>
+                <option value="Armento">Armento</option>
+                <option value="Calvera">Calvera</option>
+                <option value="Carbone">Carbone</option>
+                <option value="CastronuovodiSantAndrea">Castronuovo di Sant'Andrea</option>
+                <option value="Cersosimo">Cersosimo</option>
+                <option value="Chiaromonte">Chiaromonte</option>
+                <option value="Cirigliano">Cirigliano</option>
+                <option value="Colobraro">Colobraro</option>
+                <option value="CorletoPerticara">Corleto Perticara</option>
+                <option value="Episcopia">Episcopia</option>
+                <option value="Fardella">Fardella</option>
+                <option value="FrancavillainSinni">Francavilla in Sinni</option>
+                <option value="Gallicchio">Gallicchio</option>
+                <option value="Gorgoglione">Gorgoglione</option>
+                <option value="GrumentoNova">Grumento Nova</option>
+                <option value="GuardiaPerticara">Guardia Perticara</option>
+                <option value="MarsicoNuovo">Marsico Nuovo</option>
+                <option value="Marsicovetere">Marsicovetere</option>
+                <option value="Missanello">Missanello</option>
+                <option value="Moliterno">Moliterno</option>
+                <option value="Noepoli">Noepoli</option>
+                <option value="Paterno">Paterno</option>
+                <option value="Roccanova">Roccanova</option>
+                <option value="SanChiricoRaparo">San Chirico Raparo</option>
+                <option value="SanCostantinoAlbanese">San Costantino Albanese</option>
+                <option value="SanGiorgioLucano">San Giorgio Lucano</option>
+                <option value="SanMartinodAgri">San Martino d'Agri</option>
+                <option value="SanPaoloAlbanese">San Paolo Albanese</option>
+                <option value="SanSeverinoLucano">San Severino Lucano</option>
+                <option value="SantArcangelo">Sant'Arcangelo</option>
+                <option value="Sarconi">Sarconi</option>
+                <option value="Senise">Senise</option>
+                <option value="Spinoso">Spinoso</option>
+                <option value="Stigliano">Stigliano</option>
+                <option value="Teana">Teana</option>
+                <option value="TerranovadiPollino">Terranova di Pollino</option>
+                <option value="Tramutola">Tramutola</option>
+                <option value="Tursi_C">Tursi</option>
+                <option value="Valsinni">Valsinni</option>
+                <option value="Viggiano">Viggiano</option>
+            </optgroup>
+            <optgroup label="Base D">
+                <option value="Nemoli">Nemoli</option>
+                <option value="CastelluccioInferiore">Castelluccio Inferiore</option>
+                <option value="CastelluccioSuperiore">Castelluccio Superiore</option>
+                <option value="Castelsaraceno">Castelsaraceno</option>
+                <option value="Lagonegro">Lagonegro</option>
+                <option value="Latronico">Latronico</option>
+                <option value="Lauria">Lauria</option>
+                <option value="Maratea">Maratea</option>
+                <option value="Rivello">Rivello</option>
+                <option value="Rotonda">Rotonda</option>
+                <option value="Trecchina">Trecchina</option>
+                <option value="Viggianello_D">Viggianello</option>
+            </optgroup>
+            <optgroup label="Base E1">
+                <option value="NovaSiri">Nova Siri</option>
+                <option value="Policoro">Policoro</option>
+                <option value="Rotondella_E1">Rotondella</option>
+                <option value="ScanzanoJonico">Scanzano Jonico</option>
+                <option value="Tursi_E1">Tursi</option>
+                <option value="MontalbanoJonico">Montalbano Jonico</option>
+                <option value="Craco">Craco</option>
+            </optgroup>
+            <optgroup label="Base E2">
+                <option value="Montescaglioso">Montescaglioso</option>
+                <option value="Bernalda">Bernalda</option>
+                <option value="Pisticci">Pisticci</option>
+                <option value="Pomarico_E2">Pomarico</option>
+                <option value="Ferrandina_E2">Ferrandina</option>
+            </optgroup>
+            <option value="all">Tutta la Regione</option>
+            <option value="A1_base">Base A1</option>
+            <option value="A2_base">Base A2</option>
+            <option value="B_base">Base B</option>
+            <option value="C_base">Base C</option>
+            <option value="D_base">Base D</option>
+            <option value="E1_base">Base E1</option>
+            <option value="E2_base">Base E2</option>
+        </select>
+
+        <div id="alertResults">
+            <h2>Allerta Meteo per <span id="selectedLocation"></span></h2>
+            <h3>Oggi - <span id="oggiData"></span></h3>
+            <p id="oggiAlert"></p>
+            <h3>Domani - <span id="domaniData"></span></h3>
+            <p id="domaniAlert"></p>
+        </div>
+    </div>
+
+    <script>
+     // Initialize Firebase
+		const firebaseConfig = {
+			apiKey: "INSERISCI_LA_TUA_API_KEY",
+			authDomain: "INSERISCI_IL_TUO_PROJECT_ID.firebaseapp.com",
+			databaseURL: "https://INSERISCI_IL_TUO_PROJECT_ID-default-rtdb.europe-west1.firebasedatabase.app",
+			projectId: "INSERISCI_IL_TUO_PROJECT_ID",
+			storageBucket: "INSERISCI_IL_TUO_PROJECT_ID.appspot.com",
+			messagingSenderId: "INSERISCI_IL_TUO_MESSAGING_SENDER_ID",
+			appId: "INSERISCI_IL_TUO_APP_ID",
+			measurementId: "INSERISCI_IL_TUO_MEASUREMENT_ID"
+		};
+
+		firebase.initializeApp(firebaseConfig);
+
+		const database = firebase.database();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Imposta le date di oggi e domani
+            const oggi = new Date();
+            const domani = new Date(oggi);
+            domani.setDate(oggi.getDate() + 1);
+
+            document.getElementById('oggiData').innerText = formatDate(oggi);
+            document.getElementById('domaniData').innerText = formatDate(domani);
+
+            function formatDate(date) {
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                return `${day}/${month}/${year}`;
+            }
+
+            function mostraAllerta() {
+                const comuneSelezionato = document.getElementById("comune").value;
+                const selectedLocationElement = document.getElementById("selectedLocation");
+                const oggiAlertElement = document.getElementById("oggiAlert");
+                const domaniAlertElement = document.getElementById("domaniAlert");
+
+                let oggiColor = "";
+                let domaniColor = "";
+                let baseComune = "";
+
+                const oggiData = document.getElementById('oggiData').innerText;
+                const domaniData = document.getElementById('domaniData').innerText;
+
+                if (comuneSelezionato === "all") {
+                    selectedLocationElement.textContent = "Tutta la Regione";
+                    oggiAlertElement.innerHTML = `
+                        Base A1: <span class="alert-color"></span><br>
+                        Base A2: <span class="alert-color"></span><br>
+                        Base B: <span class="alert-color"></span><br>
+                        Base C: <span class="alert-color"></span><br>
+                        Base D: <span class="alert-color"></span><br>
+                        Base E1: <span class="alert-color"></span><br>
+                        Base E2: <span class="alert-color"></span>
+                    `;
+                    domaniAlertElement.innerHTML = `
+                        Base A1: <span class="alert-color"></span><br>
+                        Base A2: <span class="alert-color"></span><br>
+                        Base B: <span class="alert-color"></span><br>
+                        Base C: <span class="alert-color"></span><br>
+                        Base D: <span class="alert-color"></span><br>
+                        Base E1: <span class="alert-color"></span><br>
+                        Base E2: <span class="alert-color"></span>
+                    `;
+                } else if (comuneSelezionato.endsWith("_base")) {
+                    const base = comuneSelezionato.split("_")[0];
+                    selectedLocationElement.textContent = `Base ${base}`;
+                    oggiAlertElement.innerHTML = `<span class="alert-color"></span>`;
+                    domaniAlertElement.innerHTML = `<span class="alert-color"></span>`;
+                } else {
+                    selectedLocationElement.textContent = comuneSelezionato.replace(/_A1|_A2|_B|_C|_D|_E1|_E2/g, '');
+                    oggiAlertElement.innerHTML = `<span class="alert-color"></span>`;
+                    domaniAlertElement.innerHTML = `<span class="alert-color"></span>`;
+                }
+            }
+
+            function getColorText(color) {
+                switch (color) {
+                    case "verde":
+                        return "Nessuna allerta specifica.";
+                    case "giallo":
+                        return "Possibili criticità idrogeologiche localizzate.";
+                    case "arancione":
+                        return "Possibili fenomeni intensi con criticità idrogeologica diffusa.";
+                    case "rosso":
+                        return "Elevata criticità per rischio idrogeologico e idraulico.";
+                    default:
+                        return "Nessuna informazione sull'allerta.";
+                }
+            }
+
+            // Listener for Realtime Database changes
+            database.ref('allerte').on('value', (snapshot) => {
+                const allerte = snapshot.val();
+                if (allerte) {
+                    localStorage.setItem('allerteOggi', JSON.stringify(allerte[document.getElementById('oggiData').innerText] || {}));
+                    localStorage.setItem('allerteDomani', JSON.stringify(allerte[document.getElementById('domaniData').innerText] || {}));
+                }
+                mostraAllerta(); // Update display after data is fetched
+            });
+
+            // Inizializza la visualizzazione all'avvio della pagina
+            mostraAllerta();
+
+            document.getElementById("comune").addEventListener("change", mostraAllerta);
+        });
+    </script>
+
+</body>
+</html>
