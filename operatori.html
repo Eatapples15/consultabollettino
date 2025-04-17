@@ -3,328 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inserimento Allerte Meteo</title>
- <script>
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+    <title>Inserimento Allerte Meteo - Operatori</title>
+    <script>
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID",
+        measurementId: "YOUR_MEASUREMENT_ID" // Potrebbe non essere presente
+      };
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyD1ABRI99tMtvFbbvjqyjbLImfgNMdRR28",
-  authDomain: "bollettinoregionale.firebaseapp.com",
-  projectId: "bollettinoregionale",
-  storageBucket: "bollettinoregionale.firebasestorage.app",
-  messagingSenderId: "765538370497",
-  appId: "1:765538370497:web:9c4f569754c0df01cc2540",
-  measurementId: "G-0BCQ0VRNXF"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-  </script>
-
-
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+    </script>
     <style>
-        body {
-            font-family: sans-serif;
-        }
-        .alert-form {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-		.login-form {
-            max-width: 300px;
-            margin: 100px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .login-form input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
+        body { font-family: sans-serif; }
+        .login-container, .alert-form { max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="email"], input[type="password"] { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 3px; box-sizing: border-box; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        .hidden { display: none; }
+        .error-message { color: red; margin-top: 5px; }
     </style>
-	    <!-- Firebase SDK -->
-	<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth-compat.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-database-compat.js"></script>
-
 </head>
 <body>
-	<div id="loginForm" class="login-form">
-        <h2>Login Operatore</h2>
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-        <button type="button" onclick="login()">Login</button>
-		<p id="loginError" style="color: red;"></p>
+
+    <div class="login-container" id="loginContainer">
+        <h2>Login Operatori</h2>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <button type="submit">Accedi</button>
+            <p class="error-message" id="loginError"></p>
+        </form>
     </div>
 
-    <div id="alertForm" class="alert-form" style="display:none;">
+    <div class="alert-form hidden" id="alertForm">
         <h1>Inserimento Allerte Meteo</h1>
         <p>Seleziona i colori di allerta per oggi e domani per ciascuna base.</p>
 
-        <form id="alertInputForm">
+        <form id="alertInputs">
             <fieldset>
-                <legend>Allerte per Oggi - <span id="oggiData"></span></legend>
+                <legend>Allerte per Oggi - <?php echo date('d/m/Y'); ?></legend>
                 <label for="A1_oggi">Base A1:</label>
-                <select id="A1_oggi" name="A1_oggi">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="A1_oggi" name="A1_oggi">...</select>
                 <label for="A2_oggi">Base A2:</label>
-                <select id="A2_oggi" name="A2_oggi">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="A2_oggi" name="A2_oggi">...</select>
                 <label for="B_oggi">Base B:</label>
-                <select id="B_oggi" name="B_oggi">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="B_oggi" name="B_oggi">...</select>
                 <label for="C_oggi">Base C:</label>
-                <select id="C_oggi" name="C_oggi">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="C_oggi" name="C_oggi">...</select>
                 <label for="D_oggi">Base D:</label>
-                <select id="D_oggi" name="D_oggi">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="D_oggi" name="D_oggi">...</select>
                 <label for="E1_oggi">Base E1:</label>
-                <select id="E1_oggi" name="E1_oggi">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="E1_oggi" name="E1_oggi">...</select>
                 <label for="E2_oggi">Base E2:</label>
-                <select id="E2_oggi" name="E2_oggi">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
+                <select id="E2_oggi" name="E2_oggi">...</select>
             </fieldset>
 
             <fieldset>
-                <legend>Allerte per Domani - <span id="domaniData"></span></legend>
+                <legend>Allerte per Domani - <?php echo date('d/m/Y', strtotime('+1 day')); ?></legend>
                 <label for="A1_domani">Base A1:</label>
-                <select id="A1_domani" name="A1_domani">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="A1_domani" name="A1_domani">...</select>
                 <label for="A2_domani">Base A2:</label>
-                <select id="A2_domani" name="A2_domani">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="A2_domani" name="A2_domani">...</select>
                 <label for="B_domani">Base B:</label>
-                <select id="B_domani" name="B_domani">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="B_domani" name="B_domani">...</select>
                 <label for="C_domani">Base C:</label>
-                <select id="C_domani" name="C_domani">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="C_domani" name="C_domani">...</select>
                 <label for="D_domani">Base D:</label>
-                <select id="D_domani" name="D_domani">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="D_domani" name="D_domani">...</select>
                 <label for="E1_domani">Base E1:</label>
-                <select id="E1_domani" name="E1_domani">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
-
+                <select id="E1_domani" name="E1_domani">...</select>
                 <label for="E2_domani">Base E2:</label>
-                <select id="E2_domani" name="E2_domani">
-                    <option value="">Seleziona</option>
-                    <option value="verde">Verde</option>
-                    <option value="giallo">Giallo</giallo>
-                    <option value="arancione">Arancione</arancione>
-                    <option value="rosso">Rosso</option>
-                </select>
+                <select id="E2_domani" name="E2_domani">...</select>
             </fieldset>
 
             <button type="button" onclick="salvaAllerte()">Salva Allerte</button>
         </form>
+        <button type="button" onclick="logout()">Logout</button>
     </div>
 
     <script>
-		// Initialize Firebase
-		const firebaseConfig = {
-			apiKey: "INSERISCI_LA_TUA_API_KEY",
-			authDomain: "INSERISCI_IL_TUO_PROJECT_ID.firebaseapp.com",
-			databaseURL: "https://INSERISCI_IL_TUO_PROJECT_ID-default-rtdb.europe-west1.firebasedatabase.app",
-			projectId: "INSERISCI_IL_TUO_PROJECT_ID",
-			storageBucket: "INSERISCI_IL_TUO_PROJECT_ID.appspot.com",
-			messagingSenderId: "INSERISCI_IL_TUO_MESSAGING_SENDER_ID",
-			appId: "INSERISCI_IL_TUO_APP_ID",
-			measurementId: "INSERISCI_IL_TUO_MEASUREMENT_ID"
-		};
+        const loginContainer = document.getElementById('loginContainer');
+        const alertForm = document.getElementById('alertForm');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
 
-		firebase.initializeApp(firebaseConfig);
-
-		const database = firebase.database();
-		const auth = firebase.auth();
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Nascondi il form delle allerte all'inizio
-            document.getElementById('alertForm').style.display = 'none';
-
-            // Imposta le date di oggi e domani
-            const oggi = new Date();
-            const domani = new Date(oggi);
-            domani.setDate(oggi.getDate() + 1);
-
-            document.getElementById('oggiData').innerText = formatDate(oggi);
-            document.getElementById('domaniData').innerText = formatDate(domani);
-
-            function formatDate(date) {
-                const day = date.getDate().toString().padStart(2, '0');
-                const month = (date.getMonth() + 1).toString().padStart(2, '0');
-                const year = date.getFullYear();
-                return `${day}/${month}/${year}`;
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // Utente loggato
+                loginContainer.classList.add('hidden');
+                alertForm.classList.remove('hidden');
+            } else {
+                // Utente non loggato
+                loginContainer.classList.remove('hidden');
+                alertForm.classList.add('hidden');
             }
         });
 
-		function login() {
-			const email = document.getElementById('email').value;
-			const password = document.getElementById('password').value;
-			auth.signInWithEmailAndPassword(email, password)
-				.then((userCredential) => {
-					// Login successful
-					document.getElementById('loginForm').style.display = 'none';
-					document.getElementById('alertForm').style.display = 'block';
-					document.getElementById('loginError').innerText = ''; // Clear any previous error messages
-				})
-				.catch((error) => {
-					// Login failed
-					document.getElementById('loginError').innerText = 'Credenziali non valide.';
-				});
-		}
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-		function salvaAllerte() {
-			const oggiData = document.getElementById('oggiData').innerText;
-			const domaniData = document.getElementById('domaniData').innerText;
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    loginError.textContent = '';
+                    // L'authStateChanged listener si occuperà di mostrare il form delle allerte
+                })
+                .catch((error) => {
+                    let errorMessage = '';
+                    switch (error.code) {
+                        case 'auth/user-not-found':
+                            errorMessage = 'Utente non trovato.';
+                            break;
+                        case 'auth/wrong-password':
+                            errorMessage = 'Password errata.';
+                            break;
+                        default:
+                            errorMessage = 'Errore durante l\'accesso.';
+                            break;
+                    }
+                    loginError.textContent = errorMessage;
+                });
+        });
 
-			const allerte = {
-				[oggiData]: {
-					A1: document.getElementById("A1_oggi").value,
-					A2: document.getElementById("A2_oggi").value,
-					B: document.getElementById("B_oggi").value,
-					C: document.getElementById("C_oggi").value,
-					D: document.getElementById("D_oggi").value,
-					E1: document.getElementById("E1_oggi").value,
-					E2: document.getElementById("E2_oggi").value
-				},
-				[domaniData]: {
-					A1: document.getElementById("A1_domani").value,
-					A2: document.getElementById("A2_domani").value,
-					B: document.getElementById("B_domani").value,
-					C: document.getElementById("C_domani").value,
-					D: document.getElementById("D_domani").value,
-					E1: document.getElementById("E1_domani").value,
-					E2: document.getElementById("E2_domani").value
-				}
-			};
+        function logout() {
+            auth.signOut().then(() => {
+                // L'authStateChanged listener si occuperà di mostrare il form di login
+            }).catch((error) => {
+                console.error('Errore durante il logout:', error);
+            });
+        }
 
-			database.ref('allerte').set(allerte)
-				.then(() => {
-					alert("Allerte salvate con successo!");
-				})
-				.catch((error) => {
-					console.error("Errore nel salvataggio delle allerte:", error);
-					alert("Errore nel salvataggio delle allerte.");
-				});
-		}
+        function salvaAllerte() {
+            // ... (la tua funzione salvaAllerte modificata nel passo precedente) ...
+            const allerteOggi = { /* ... */ };
+            const allerteDomani = { /* ... */ };
+            const oggi = new Date();
+            const domani = new Date(oggi);
+            domani.setDate(oggi.getDate() + 1);
+            const oggiFormatted = oggi.toISOString().slice(0, 10);
+            const domaniFormatted = domani.toISOString().slice(0, 10);
+
+            db.collection("allerte").doc(oggiFormatted).set({ basi: allerteOggi })
+                .then(() => console.log("Allerte di oggi salvate"))
+                .catch(error => console.error("Errore:", error));
+
+            db.collection("allerte").doc(domaniFormatted).set({ basi: allerteDomani })
+                .then(() => console.log("Allerte di domani salvate"))
+                .catch(error => console.error("Errore:", error));
+        }
     </script>
 
 </body>
