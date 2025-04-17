@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allerta Meteo Basilicata</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .alert-display {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        .alert-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .verde { background-color: green; }
+        .giallo { background-color: yellow; color: black; }
+        .arancione { background-color: orange; }
+        .rosso { background-color: red; }
+        #alertResults {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        #alertResults h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="alert-display">
+        <h1>Allerta Meteo Basilicata</h1>
+
+        <label for="comune">Seleziona il tuo Comune:</label>
+        <select id="comune">
+            <option value="">-- Seleziona un Comune --</option>
+            <optgroup label="Base A1">
+                <option value="Montemilone">Montemilone</option>
+                <option value="Atella">Atella</option>
+                <option value="PalazzoSanGervasio">Palazzo San Gervasio</option>
+                <option value="Pescopagano">Pescopagano</option>
+                <option value="Rapolla">Rapolla</option>
+                <option value="Rapone">Rapone</option>
+                <option value="RioneroinVulture">Rionero in Vulture</option>
+                <option value="Ripacandida">Ripacandida</option>
+                <option value="RuvodelMonte">Ruvo del Monte</option>
+                <option value="SanFele">San Fele</option>
+                <option value="Filiano_A1">Filiano</option>
+                <option value="Forenza_A1">Forenza</option>
+                <option value="Lavello">Lavello</option>
+                <option value="Barile">Barile</option>
+                <option value="Maschito">Maschito</option>
+                <option value="Melfi">Melfi</option>
+                <option value="Venosa">Venosa</option>
+                <option value="Ginestra">Ginestra</option>
+            </optgroup>
+            <optgroup label="Base A2">
+                <option value="MuroLucano">Muro Lucano</option>
+                <option value="Balvano">Balvano</option>
+                <option value="Baragiano">Baragiano</option>
+                <option value="Bella">Bella</option>
+                <option value="Brienza">Brienza</option>
+                <option value="Castelgrande">Castelgrande</option>
+                <option value="Picerno">Picerno</option>
+                <option value="Ruoti">Ruoti</option>
+                <option value="SantAngeloLeFratte">Sant'Angelo Le Fratte</option>
+                <option value="SassodiCastalda">Sasso di Castalda</option>
+                <option value="SatrianodiLucania">Satriano di Lucania</option>
+                <option value="SavoiadiLucania">Savoia di Lucania</option>
+                <option value="Tito_A2">Tito</option>
+                <option value="VietridiPotenza">Vietri di Potenza</option>
+            </optgroup>
+            <optgroup label="Base B">
+                <option value="Abriola">Abriola</option>
+                <option value="Accettura">Accettura</option>
+                <option value="Acerenza">Acerenza</option>
+                <option value="AlbanodiLucania">Albano di Lucania</option>
+                <option value="Anzi">Anzi</option>
+                <option value="Avigliano">Avigliano</option>
+                <option value="Banzi">Banzi</option>
+                <option value="BrindisiMontagna">Brindisi Montagna</option>
+                <option value="Calciano">Calciano</option>
+                <option value="Calvello">Calvello</option>
+                <option value="Campomaggiore">Campomaggiore</option>
+                <option value="Cancellara">Cancellara</option>
+                <option value="Castelmezzano">Castelmezzano</option>
+                <option value="Ferrandina_B">Ferrandina</option>
+                <option value="Filiano_B">Filiano</option>
+                <option value="Forenza_B">Forenza</option>
+                <option value="Garaguso">Garaguso</option>
+                <option value="GenzanodiLucania">Genzano di Lucania</option>
+                <option value="Grassano">Grassano</option>
+                <option value="Grottole">Grottole</option>
+                <option value="Irsina">Irsina</option>
+                <option value="Laurenzana">Laurenzana</option>
+                <option value="Miglionico">Miglionico</option>
+                <option value="OlivetoLucano">Oliveto Lucano</option>
+                <option value="OppidoLucano">Oppido Lucano</option>
+                <option value="Pietragalla">Pietragalla</option>
+                <option value="Pietrapertosa">Pietrapertosa</option>
+                <option value="Pignola">Pignola</option>
+                <option value="Pomarico_B">Pomarico</option>
+                <option value="Potenza">Potenza</option>
+                <option value="Salandra">Salandra</option>
+                <option value="SanChiricoNuovo">San Chirico Nuovo</option>
+                <option
