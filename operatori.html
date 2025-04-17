@@ -1,1 +1,222 @@
 
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserimento Allerte Meteo</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .alert-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="alert-form">
+        <h1>Inserimento Allerte Meteo</h1>
+        <p>Seleziona i colori di allerta per oggi e domani per ciascuna base.</p>
+
+        <form id="alertForm">
+            <fieldset>
+                <legend>Allerte per Oggi - <?php echo date('d/m/Y'); ?></legend>
+                <label for="A1_oggi">Base A1:</label>
+                <select id="A1_oggi" name="A1_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="A2_oggi">Base A2:</label>
+                <select id="A2_oggi" name="A2_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="B_oggi">Base B:</label>
+                <select id="B_oggi" name="B_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="C_oggi">Base C:</label>
+                <select id="C_oggi" name="C_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="D_oggi">Base D:</label>
+                <select id="D_oggi" name="D_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="E1_oggi">Base E1:</label>
+                <select id="E1_oggi" name="E1_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="E2_oggi">Base E2:</label>
+                <select id="E2_oggi" name="E2_oggi">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Allerte per Domani - <?php echo date('d/m/Y', strtotime('+1 day')); ?></legend>
+                <label for="A1_domani">Base A1:</label>
+                <select id="A1_domani" name="A1_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="A2_domani">Base A2:</label>
+                <select id="A2_domani" name="A2_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="B_domani">Base B:</label>
+                <select id="B_domani" name="B_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="C_domani">Base C:</label>
+                <select id="C_domani" name="C_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="D_domani">Base D:</label>
+                <select id="D_domani" name="D_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="E1_domani">Base E1:</label>
+                <select id="E1_domani" name="E1_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+
+                <label for="E2_domani">Base E2:</label>
+                <select id="E2_domani" name="E2_domani">
+                    <option value="">Seleziona</option>
+                    <option value="verde">Verde</option>
+                    <option value="giallo">Giallo</option>
+                    <option value="arancione">Arancione</option>
+                    <option value="rosso">Rosso</option>
+                </select>
+            </fieldset>
+
+            <button type="button" onclick="salvaAllerte()">Salva Allerte</button>
+        </form>
+    </div>
+
+    <script>
+        function salvaAllerte() {
+            const allerteOggi = {
+                A1: document.getElementById("A1_oggi").value,
+                A2: document.getElementById("A2_oggi").value,
+                B: document.getElementById("B_oggi").value,
+                C: document.getElementById("C_oggi").value,
+                D: document.getElementById("D_oggi").value,
+                E1: document.getElementById("E1_oggi").value,
+                E2: document.getElementById("E2_oggi").value
+            };
+
+            const allerteDomani = {
+                A1: document.getElementById("A1_domani").value,
+                A2: document.getElementById("A2_domani").value,
+                B: document.getElementById("B_domani").value,
+                C: document.getElementById("C_domani").value,
+                D: document.getElementById("D_domani").value,
+                E1: document.getElementById("E1_domani").value,
+                E2: document.getElementById("E2_domani").value
+            };
+
+            // Qui dovresti inviare 'allerteOggi' e 'allerteDomani' a un server
+            // per poterle poi recuperare e visualizzare nella pagina per gli utenti.
+            // Questo di solito si fa con richieste AJAX (ad esempio, con la funzione fetch()).
+
+            console.log("Allerte Oggi:", allerteOggi);
+            console.log("Allerte Domani:", allerteDomani);
+
+            alert("Allerte salvate!"); // Sostituisci con una logica di reindirizzamento o feedback più appropriata.
+        }
+    </script>
+
+</body>
+</html>
